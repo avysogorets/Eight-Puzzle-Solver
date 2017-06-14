@@ -1,6 +1,7 @@
 # Eight-Puzzle-Solver
 
 OVERVIEW.
+
 The problem of solving Eight-Puzzle (the smaller version of the well-known 15-puzzle) is
 widely explored and realized with a multitude of different approaches on various languages. The
 most basic solution is to traverse the graph of positions with so-called breadth-first-search.
@@ -41,8 +42,8 @@ This approach processes any position in 10-100 milliseconds, and the length of t
 solutions is rarely greater than 35 (whereas the diameter of the entire group is 31). Further detailed
 statistics are to be discovered.
 
-Author: Artem Vysogorets,
-BS Mathematics, University of Massachusetts, Amherst 2019
+Author: Artem Vysogorets.
+BS Mathematics, University of Massachusetts, Amherst 2019.
 Contact via e-mail: avysogorets@umass.edu
 Works Referenced: "The Diameter of The Rubik's Cube Group is 20" by Thomas Rokicki.
 GNU General Public Licence 3.0 2017.
