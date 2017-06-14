@@ -15,11 +15,13 @@ outputs a solution to a random Eight-Puzzle position in 10 to 100 milliseconds (
 diameter of the Eigth-Puzzle graph is 31, my solutions' length rarely exceeds 35 moves.
 
 REPRESENTATION.
+
 One of the most intuitive and thus convenient ways to represent any state of the Eight-Puzzle is by
 using an even permutation from the set Perm9. For example, the solved position will be written as
 [1, 2, 3, 4, 5, 6, 7, 8, 0], where 9 is written as 0 to represent an empty slot.
 
 ALGORITHM.
+
 The underlying idea is to solve any given position of the EightPuzzle in two stages. Thomas Rokicki and
 other Cube solvers suggest that setting a subgoal of reaching some subgroup might be useful (Here, the
 group would be the set of all even permutations from Perm9). I follow the same approach and, on the first
@@ -38,6 +40,7 @@ access an appropriate set of moves that will bring it to the subgroup. The final
 moves from stage 1 (table value), and the sequence produced by the BFS of the reduced puzzle.
 
 ANALYSIS.
+
 This approach processes any position in 10-100 milliseconds, and the length of the produced suboptimal
 solutions is rarely greater than 35 (whereas the diameter of the entire group is 31). Further detailed
 statistics are to be discovered.
@@ -45,7 +48,8 @@ statistics are to be discovered.
 Author: Artem Vysogorets.
 BS Mathematics, University of Massachusetts, Amherst 2019.
 Contact via e-mail: avysogorets@umass.edu
-Works Referenced: "The Diameter of The Rubik's Cube Group is 20" by Thomas Rokicki.
 GNU General Public Licence 3.0 2017.
+
+Works Referenced: "The Diameter of The Rubik's Cube Group is 20" by Thomas Rokicki.
 
 
