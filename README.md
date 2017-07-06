@@ -46,6 +46,7 @@ solutions is rarely greater than 35 (whereas the diameter of the entire group is
 statistics are to be discovered.
 
 Author: Artem Vysogorets.
+Advisor: Dr. Eric Sommers
 BS Mathematics, University of Massachusetts, Amherst 2019.
 Contact via e-mail: avysogorets@umass.edu
 GNU General Public Licence 3.0 2017.
