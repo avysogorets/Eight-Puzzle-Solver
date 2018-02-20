@@ -1,4 +1,4 @@
-package structures;
+
 
 /**
  * The implementation of Nodes, which is later used to realize a queue.
