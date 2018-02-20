@@ -7,7 +7,7 @@ import puzzle.EightPuzzle;
 /*
  * YAstate = Yet Another state class (not to confuse with Java's State class)
  * This class incorporates all necessary information about a puzzle position
- * to be used by ManhattanSearch. In particular, this class defines the order
+ * to be used by the A* Search. In particular, this class defines the order
  * of states that is used by heap.
  * 
 */
