@@ -3,53 +3,45 @@
 OVERVIEW.
 
 The problem of solving Eight-Puzzle (the smaller version of the well-known 15-puzzle) is
-widely explored and realized with a multitude of different approaches on various languages. The
-most basic solution is to traverse the graph of positions with so-called breadth-first-search.
-However, many interesting search problems happen to have immense graphs, which makes BFS search virtually helpless
-For example, the Rubik' Cube graph consists of 4.3 quintillion vertices. In order to solve such
-puzzles, one needs to discover more sophisticated approaches, shortcuts, invariants and reasonable
-subgoals, which would improve the time-efficiency of the search. Inspired by Thomas Rokicki's use
-of algebra and subgoals in solving the Rubik's Cube, I decided to tackle a much smaller problem
-(Eight-Puzzle has a graph of 181,440 vertices) with similar tricks. With their help, the resulting program
-outputs a solution to a random Eight-Puzzle position in 10 to 100 milliseconds (on average). While the
-diameter of the Eigth-Puzzle graph is 31, my solutions' length rarely exceeds 35 moves.
+widely explored and realized with a multitude of different approaches on various languages. 
+One basic solution is to traverse the graph of positions with BFS. However, many interesting
+search problems happen to have immense graphs, which makes BFS search unsuitable.
+For example, the Rubik' cube graph consists of 4.3 quintillion vertices. In order to solve such
+puzzles, one needs to discover more sophisticated approaches that could find suboptimal solutions
+in a reasonable time. Inspired by Thomas Rokicki's use of algebra in solving the Rubik's cube, we
+tackle a much smaller problem (Eight-Puzzle has a state graph of 181,440 vertices) with similar
+techniques. This program outputs instant solutions of length at most 20% greater than optimal.
 
 REPRESENTATION.
 
-One of the most intuitive and thus convenient ways to represent any state of the Eight-Puzzle is by
-using an even permutation from the set Perm9. For example, the solved position will be written as
-[1, 2, 3, 4, 5, 6, 7, 8, 0], where 9 is written as 0 to represent an empty slot.
+We use a permutations to represent states of the puzzle. For example, the solved position is
+[1, 2, 3, 4, 5, 6, 7, 8, 0] ('0' represents an empty slot).
 
 ALGORITHM.
 
 The underlying idea is to solve any given position of the EightPuzzle in two stages. Thomas Rokicki and
-other Cube solvers suggest that setting a subgoal of reaching some subgroup might be useful (Here, the
-group would be the set of all even permutations from Perm9). I follow the same approach and, on the first
-stage, attempt to bring any given position to the subgroup, which consists of all permutations (positions)
-with tokens 1, 2, 3 at their places. That is, I am looking at the subgroup of Perm9 with elements of the
-following form: [1, 2, 3, x, x, x, x, x, x]. As soon as I bring a position to the subgroup, the remaining
-task is trivial: I need to traverse the graph of the reduced eight-puzzle (puzzle 2x3 with tokens 1, 2, 3
-fixed) with BFS, which is done in milliseconds as the number of vertices in this graph is 360. Effective
-solution to the stage 1, however, should be accomplished with some other technique. To bring the position to
-the subgroup with 1, 2, 3 tokens at their slots, the program refers to a hash table of size 1000. The 
-principle is that a reversed set of moves that brings the solved state (the identity permutation) into some
-other state A will bring a state B with the same positions of tokens 1, 2, 3 as in A into the subgroup
-described above. Thus, a table storing sequences of moves for all possible positions of tokens 1, 2, 3 will
-help on stage 1. The slots of tokens 1, 2, 3 in the given position is all we need to know in order to
-access an appropriate set of moves that will bring it to the subgroup. The final output should consist of
-moves from stage 1 (table value), and the sequence produced by the BFS of the reduced puzzle.
+other cube solvers often set subgoals of reaching certain subgroups of the state graph within the search.
+We follow the same approach and, at the first stage, bring any given position to the subgroup consisting 
+of all positions with tokens 1, 2, 3 at their places. When this is accomplished, we need to traverse the
+graph of the remaining puzzle (2x3) with BFS.
 
-ANALYSIS.
+Stage 1 goal is achieved by using a look-up table of size 1000, which stores the shortest paths from any coset
+to the subgroup specified above. The key principle is that a set of moves that brings the solved state (identity)
+to some other state A, when reversed, will bring any state B with the same positions of tokens 1, 2, 3 as in A
+to the desired subgroup. Thus, a look-up table storing sequences of moves for all possible positions of tokens
+1, 2, 3 (i.e. for all cosets) will help on stage 1. This table is constructed by traversing the entire state 
+graph of the puzzle, however, this has to be done only once.
 
-This approach processes any position in 10-100 milliseconds, and the length of the produced suboptimal
-solutions is rarely greater than 35 (whereas the diameter of the entire group is 31). Further detailed
-statistics are to be discovered.
+RESULTS.
 
-Author: Artem Vysogorets.
-BS Mathematics, University of Massachusetts, Amherst 2019.
-Contact via e-mail: avysogorets@umass.edu.
+This approach instantly processes any random state of the puzzle and the length of the produced suboptimal
+solutions rarely exceeds 20% of the optimal length.
+
+
+This work was supported by the Research Assistance Fellowship grant from the Commonwealth Honors College, Amherst, MA
+
+Artem Vysogorets, B.S. in Mathematics, University of Massachusetts Amherst (2017).
 Advisor: Dr. Eric Sommers.
-GNU General Public Licence 3.0 2017.
 
 Works Referenced: "The Diameter of The Rubik's Cube Group is 20" by Thomas Rokicki.
 
